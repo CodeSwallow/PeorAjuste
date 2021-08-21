@@ -1,0 +1,137 @@
+#:import rgba kivy.utils.get_color_from_hex
+
+<LabelRV@Label>:
+    canvas.before:
+        Color:
+            rgba: rgba('#FFFFFF')
+        Line:
+            width: 1
+            rectangle: self.x, self.y, self.width, self.height
+
+<Proceso>:
+    canvas.before:
+        Color:
+            rgba: rgba('#02505e')
+        Line:
+            width: 2
+            rectangle: self.x, self.y, self.width, self.height
+    outline_color: 0, 0, 0
+    outline_width: 1
+    font_size: 15
+
+<RVProcesos>:
+    viewclass: 'LabelRV'
+    RecycleBoxLayout:
+        default_size: None, dp(56)
+        default_size_hint: 1, None
+        size_hint_y: None
+        height: self.minimum_height
+        orientation: 'vertical'
+
+<RV>:
+    viewclass: 'LabelRV'
+    RecycleBoxLayout:
+        default_size: None, dp(56)
+        default_size_hint: 1, None
+        size_hint_y: None
+        height: self.minimum_height
+        orientation: 'vertical'
+
+
+<MemoriaLabel>:
+    canvas.before:
+        Color:
+            rgba: rgba('#275c61')
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<MemoriaPrincipal>:
+    canvas.before:
+        Color:
+            rgba: rgba('#b9c1c4')
+        Rectangle:
+            size: self.size 
+            pos: self.pos
+    orientation: 'vertical'
+
+<MainWindow>:  
+    canvas:
+        Color:
+            rgba: rgba('#7f9299')
+        Rectangle:
+            size: self.size 
+            pos: self.pos
+    spacing: 10
+    padding: 10
+    BoxLayout:
+        spacing: 2
+        padding: 2
+        size_hint_x: .38
+        orientation: 'vertical'
+        BoxLayout:
+            canvas.before:
+                Color:
+                    rgba: rgba('#263133')
+                Rectangle:
+                    size: self.size 
+                    pos: self.pos
+            size_hint_y: .65
+            orientation: 'vertical'
+            Label:
+                id: procesos_no
+                canvas.before:
+                    Color:
+                        rgba: rgba('#011c21')
+                    Rectangle:
+                        size: self.size 
+                        pos: self.pos
+                text: 'Procesos'
+                size_hint_y: .1
+            RVProcesos:
+                id: rvs
+        BoxLayout:
+            size_hint_y: .3
+            orientation: 'vertical'
+            canvas:
+                Color:
+                    rgba: rgba('#545869')
+                Rectangle:
+                    size: self.size 
+                    pos: self.pos
+            Label:
+                id: espera_no
+                canvas.before:
+                    Color:
+                        rgba: rgba('#011c21')
+                    Rectangle:
+                        size: self.size 
+                        pos: self.pos
+                text: 'En Espera'
+                size_hint_y: .1
+            RV:
+                id: espera
+        BoxLayout:
+            size_hint_y: .07
+            Button:
+                id: empezar_boton
+                text: 'Empezar'
+                on_release: root.inicio()
+    MemoriaPrincipal: 
+        id: memoria_principal
+        size_hint_x: .35
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint_x: .25
+        Label:
+            id: particiones_no
+            size_hint_y: .11
+            canvas.before:
+                Color:
+                    rgba: rgba('#275c61')
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            text: 'Particiones'
+        RV:
+            id: particiones
